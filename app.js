@@ -12,6 +12,10 @@ app.use(bodyParser.json());
 const postsRoute = require('./routes/posts');
 const userRoute  = require('./routes/user');
 
+//Database connection
+const mongodb = require('./db/connection');
+mongodb.connection();
+
 //Routes
 app.get('/', (req, res) => {
     res.send('We are on HomePage')
