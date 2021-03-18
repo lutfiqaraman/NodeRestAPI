@@ -9,3 +9,8 @@ const Post = require('../models/Post');
 
 // VALIDATION Import
 const { registerValidation, loginValidation } = require('../validation');
+
+//Register User
+router.post('/register', async (req, res) => {
+
+})
