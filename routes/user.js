@@ -45,3 +45,20 @@ router.post('/register', async (req, res) => {
         res.json({ msg: err });
     }
 });
+
+// Login User
+router.post('/login', async(req, res) => {
+    const { error } = loginValidation(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
+    // Check if Email Exists
+    const user = await User.findOne({ email: req.body.email });
+    if(!user) return res.status(400).send('Email Does Not Exist');
+
+    const validPass = await bcrypt.compare(req.body.password, user.password)
+    if(!validPass) return res.status(400).send('Invalid Password');
+
+    // Create & Assign Token
+    const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+    res.header('auth-token', token).send(token);
+});
