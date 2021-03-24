@@ -12,6 +12,9 @@ app.use(bodyParser.json());
 const postsRoute = require('./routes/posts');
 const userRoute  = require('./routes/user');
 
+app.use('/posts', postsRoute);
+app.use('/user', userRoute);
+
 //Database connection
 const mongodb = require('./db/connection');
 mongodb.connection();
