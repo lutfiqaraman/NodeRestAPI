@@ -1,8 +1,8 @@
-const userModel = require('../models/user');
+import UserSchema from '../models/user.models.js';
 
-exports.register = async (req, res) => {
+export const register = async (req, res) => {
 
-    const user = new userModel(req.body);
+    const user = new UserSchema(req.body);
 
     try {
         console.log(user);

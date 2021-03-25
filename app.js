@@ -1,16 +1,16 @@
-require('./db/connection');
-require('dotenv').config({ path: './config/.env' });
+import express from 'express';
+import cors from 'cors';
+import { userRoute } from './routes/user.routes.js';
+import { homeRoute } from "./routes/home.routes.js";
 
-const express = require('express');
-const cors = require('cors')
-
-const app = express();
+export const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-require('./routes/user.routes')(app);
-require('./routes/posts.routes')(app);
+userRoute();
+homeRoute();
 
-module.exports = app;
-
+app.listen(3000, () => {
+    console.log('server is running');
+});

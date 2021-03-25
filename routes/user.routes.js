@@ -1,5 +1,10 @@
-const userController = require('../controllers/user.controller');
+import { app } from "../app.js";
+import { register } from '../controllers/user.controller.js';
 
-module.exports = app => {
-    app.post('/user/register', userController.register());
+const registerPath = '/user/register';
+
+export const userRoute = () => {
+    app.post(registerPath, register);
 };
+
+

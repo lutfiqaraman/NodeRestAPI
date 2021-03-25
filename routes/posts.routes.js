@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Post = require('../models/Post');
+const Post = require('../models/post.models');
 
 // Create A post for specific user - Create
 router.post('/:uid', async (req, res) => {
