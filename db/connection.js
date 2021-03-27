@@ -11,7 +11,7 @@ const password = process.env.MONGOPASSWORD;
 
 const uri = `mongodb+srv://${username}:${password}@cluster0-eqore.mongodb.net/`;
 
-export const connection = () => {
+export const dbConnection = () => {
     mongoose.connect(
         uri,
         {
