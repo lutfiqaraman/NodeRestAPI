@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 import { userRoute } from './routes/user.routes.js';
 import { homeRoute } from './routes/home.routes.js';
-import { dbConnection } from "./db/connection.js";
+import { dbConnection } from './db/connection.js';
 
 export const app = express();
 
