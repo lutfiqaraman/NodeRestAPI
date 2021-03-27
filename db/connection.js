@@ -1,14 +1,17 @@
 // Connect MongoDB
-require("dotenv").config();
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 
-const mongoose = require('mongoose');
+dotenv.config({
+    path: './config/.env'
+});
 
 const username = process.env.MONGOUSER;
 const password = process.env.MONGOPASSWORD;
 
 const uri = `mongodb+srv://${username}:${password}@cluster0-eqore.mongodb.net/`;
 
-exports.connection = () => {
+export const connection = () => {
     mongoose.connect(
         uri,
         {
@@ -21,4 +24,4 @@ exports.connection = () => {
     }).catch((err) => {
         if (err) throw err;
     });
-}
+};
