@@ -18,11 +18,18 @@ export const register = async (req, res) => {
         return res.status(400).send('Email is already exist');
     }
 
-    const user = new UserSchema(req.body);
-    user.password = hashPassword(req.body.password);
+    const user = new UserSchema({
+        name: req.body.name,
+        email: req.body.email,
+        password: hashPassword(req.body.password)
+    });
 
     try {
-        res.status(200).send(user);
+        await user.save();
+        res.status(201).json({
+            name: user.name,
+            email: user.email
+        });
     } catch (error) {
         res.status(400).send(error);
     }
