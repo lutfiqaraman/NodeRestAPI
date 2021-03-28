@@ -10,6 +10,14 @@ export const register = async (req, res) => {
         return res.status(400).send(error.details[0].message);
     }
 
+    const emailExist = await UserSchema.findOne({
+        email: req.body.email
+    });
+
+    if (emailExist) {
+        return res.status(400).send('Email is already exist');
+    }
+
     const user = new UserSchema(req.body);
     user.password = hashPassword(req.body.password);
 
