@@ -43,4 +43,14 @@ export const login = async (req, res) => {
     if (error) {
         return res.status(400).send(error.details[0].message);
     }
+
+    //Check if user is exist by email
+    const user = await UserSchema.findOne({
+        email: req.body.email
+    });
+
+    if (!user) {
+        return res.status(400).send('Email does not exist');
+    }
+
 }
