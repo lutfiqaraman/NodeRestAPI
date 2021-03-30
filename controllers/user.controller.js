@@ -1,6 +1,7 @@
 import UserSchema from '../models/user.models.js';
 import { hashPassword } from "../assets/hashingpassword.js";
 import { registerValidation, loginValidation } from "../assets/validation.js";
+import {comparePasswords} from "../assets/comparepasswords";
 
 export const register = async (req, res) => {
 
@@ -53,4 +54,8 @@ export const login = async (req, res) => {
         return res.status(400).send('Email does not exist');
     }
 
+    const validPass = await comparePasswords(req.body.password, user.password);
+    if (!validPass) {
+        return res.status(400).send('Invalid password');
+    }
 }
