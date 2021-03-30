@@ -1,7 +1,7 @@
 import UserSchema from '../models/user.models.js';
 import { hashPassword } from "../assets/hashingpassword.js";
 import { registerValidation, loginValidation } from "../assets/validation.js";
-import {comparePasswords} from "../assets/comparepasswords";
+import {comparePasswords} from "../assets/comparepasswords.js";
 
 export const register = async (req, res) => {
 
@@ -57,5 +57,7 @@ export const login = async (req, res) => {
     const validPass = await comparePasswords(req.body.password, user.password);
     if (!validPass) {
         return res.status(400).send('Invalid password');
+    } else {
+        res.status(200).send('TRUE VALUES');
     }
 }
