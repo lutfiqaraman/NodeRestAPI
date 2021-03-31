@@ -47,20 +47,37 @@ export const login = async (req, res) => {
     }
 
     //Check if user is exist by email
-    const user = await UserSchema.findOne({
+    let userPassword = '',
+        userEmail = '',
+        userID = '';
+
+    await UserSchema.findOne({
         email: req.body.email
+    }, function (err, user) {
+
+        if (err) {
+            return res.status(400).send('error had been occurred')
+        }
+
+        userPassword = user.password;
+        userEmail    = user.email;
+        userID       = user._id;
     });
 
-    if (!user) {
+    console.log('email ' + userEmail);
+    console.log('password ' + userPassword);
+    console.log(userID);
+
+    if (!userEmail) {
         return res.status(400).send('Email does not exist');
     }
 
-    const validPass = await comparePasswords(req.body.password, user.password);
+    const validPass = await comparePasswords(req.body.password, userPassword);
     if (!validPass) {
         return res.status(400).send('Invalid password');
     }
 
     // Create & Assign Token
-    const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+    const token = jwt.sign({ _id: userID }, process.env.TOKEN_SECRET);
     res.status(200).send(token);
 }
