@@ -64,10 +64,6 @@ export const login = async (req, res) => {
         userID       = user._id;
     });
 
-    console.log('email ' + userEmail);
-    console.log('password ' + userPassword);
-    console.log(userID);
-
     if (!userEmail) {
         return res.status(400).send('Email does not exist');
     }
