@@ -74,6 +74,6 @@ export const login = async (req, res) => {
     }
 
     // Create & Assign Token
-    const token = jwt.sign({ _id: userID }, process.env.TOKEN_SECRET);
-    res.status(200).send(token);
+    const jwtToken = jwt.sign({ _id: userID }, process.env.TOKEN_SECRET);
+    res.status(200).send(jwtToken);
 }
