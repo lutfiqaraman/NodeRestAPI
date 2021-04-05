@@ -77,3 +77,12 @@ export const login = async (req, res) => {
     const jwtToken = jwt.sign({ _id: userID }, process.env.TOKEN_SECRET);
     res.status(200).send(jwtToken);
 }
+
+//Delete A User
+export const deleteUser = (req, res) => {
+
+}
+
+export const deleteUserPosts = (req, res) => {
+
+}
