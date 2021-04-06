@@ -79,8 +79,15 @@ export const login = async (req, res) => {
 }
 
 //Delete A User
-export const deleteUser = (req, res) => {
-
+export const deleteUser = async (req, res) => {
+    try {
+        const removedUser = await UserSchema.remove({
+            _id: req.params.uid
+        });
+        res.json(removedUser);
+    } catch(err) {
+        res.json({ message: err });
+    }
 }
 
 export const deleteUserPosts = (req, res) => {
