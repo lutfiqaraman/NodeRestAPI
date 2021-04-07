@@ -90,6 +90,13 @@ export const deleteUser = async (req, res) => {
     }
 }
 
-export const deleteUserPosts = (req, res) => {
-
+export const deleteUserPosts = async (req, res) => {
+    try {
+        const removedUser = await UserSchema.remove({ _id: req.params.uid, get: req.body });
+        //const removedPosts = await Post.deleteMany({ userID: req.params.uid });
+        res.json(removedUser);
+        //res.json(removedPosts);
+    } catch(err) {
+        res.json({ message: err });
+    }
 }
